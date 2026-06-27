@@ -1,0 +1,12 @@
+{
+  "name": "crossview",
+  "version": "0.1.0-alpha",
+  "description": "Cross-referenced MITRE security knowledge silo (CAPEC, CWE, ATT&CK Enterprise/Mobile/ICS, ATLAS, D3FEND, UKC) plus a 5-stage code scanner that walks findings through the canonical graph and produces SARIF + STIX reports.",
+  "author": "Sean Jeffery Kalanikoa Lum",
+  "license": "MIT",
+  "skills": [
+    "skills/crossview"
+  ],
+  "homepage": "https://github.com/kalanik0a/crossview",
+  "tags": ["security", "sast", "mitre", "atlas", "cwe", "capec", "attack", "d3fend", "ukc", "scanner"]
+}
