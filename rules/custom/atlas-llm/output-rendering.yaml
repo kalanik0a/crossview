@@ -1,0 +1,48 @@
+rules:
+  - id: atlas-llm-response-rendering-html-xss
+    languages: [typescript, javascript]
+    severity: ERROR
+    message: |
+      LLM-generated text rendered via `dangerouslySetInnerHTML` is a direct
+      XSS vector. MITRE ATLAS AML.T0077 (LLM Response Rendering) describes
+      adversary-influenced LLM output causing client-side compromise.
+      Render LLM output as text or sanitize through DOMPurify before
+      injecting; never trust LLM output as HTML.
+    metadata:
+      cwe:
+        - "CWE-79"
+        - "CWE-1426"
+      atlas:
+        - "AML.T0077"
+      category: security
+      references:
+        - https://atlas.mitre.org/techniques/AML.T0077
+    pattern: |
+      <$EL dangerouslySetInnerHTML={{ __html: $CONTENT }} />
+
+  - id: atlas-llm-response-eval
+    languages: [python, javascript, typescript]
+    severity: ERROR
+    message: |
+      LLM-generated text evaluated as code creates a path for
+      LLM-mediated remote code execution. ATLAS AML.T0067 (LLM Trusted
+      Output Components Manipulation) — a successful prompt injection
+      can produce arbitrary code that this site executes. If you must
+      execute LLM-generated code, sandbox it (subprocess with locked-
+      down env, container, or a dedicated sandbox runtime).
+    metadata:
+      cwe:
+        - "CWE-94"
+        - "CWE-1426"
+      atlas:
+        - "AML.T0067"
+      category: security
+    pattern-either:
+      - pattern: |
+          eval($RESPONSE.content[0].text)
+      - pattern: |
+          eval($RESPONSE.choices[0].message.content)
+      - pattern: |
+          exec($RESPONSE.content[0].text)
+      - pattern: |
+          exec($RESPONSE.choices[0].message.content)

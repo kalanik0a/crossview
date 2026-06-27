@@ -1,0 +1,55 @@
+{
+  "title": "Crossview",
+  "subtitle": "MITRE silo + 5-stage code scanner",
+  "voice": "onyx",
+  "segments": [
+    {
+      "id": "00-intro",
+      "slide": "__title__",
+      "caption": "",
+      "text": "Crossview. A cross-referenced MITRE security knowledge silo, and a five-stage code scanner, in one tool."
+    },
+    {
+      "id": "01-show",
+      "slide": "show-cwe-89.png",
+      "caption": "crossview show CWE-89",
+      "text": "The whole MITRE graph lives in one local database. Ask about any entity, like CWE-89, SQL injection, and Crossview shows it with every cross-reference, in both directions."
+    },
+    {
+      "id": "02-search",
+      "slide": "search.png",
+      "caption": "crossview search",
+      "text": "Full-text search spans the entire silo: weaknesses, attack patterns, ATT&CK, ATLAS, D3FEND, and the Unified Kill Chain."
+    },
+    {
+      "id": "03-stats",
+      "slide": "dev-stats.png",
+      "caption": "crossview dev stats",
+      "text": "That is roughly thirty-seven hundred canonical entities and fourteen thousand cross-references, all offline."
+    },
+    {
+      "id": "04-tui",
+      "slide": "tui-explorer.png",
+      "caption": "crossview tui",
+      "text": "Browse it interactively in the terminal: tree views, search, and a detail panel for any entity."
+    },
+    {
+      "id": "05-graphql",
+      "slide": "graphiql.png",
+      "caption": "crossview graphql",
+      "text": "Or query it programmatically. The built-in GraphQL surface walks a weakness straight through its exploit chain, from CWE to CAPEC to ATT&CK to D3FEND."
+    },
+    {
+      "id": "06-scan",
+      "slide": "help.png",
+      "caption": "crossview scan",
+      "text": "Point Crossview at a codebase, and its five-stage scanner threads every finding through that same graph, then intersects it with the CVEs that are actually being exploited in the wild."
+    },
+    {
+      "id": "07-outro",
+      "slide": "__outro__",
+      "caption": "",
+      "text": "Crossview. Know the weakness, the attack, and the defense, before you ship."
+    }
+  ]
+}

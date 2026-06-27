@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crossview — MITRE silo + 5-stage code scanner</title>
+  <meta name="description" content="A cross-referenced MITRE knowledge silo (CWE/CAPEC/ATT&CK/ATLAS/D3FEND/UKC) + a 5-stage code scanner that walks findings through the graph, intersects them with CISA KEV, and fuses LLM threat intel. Self-hosted, open-source." />
+
+  <!-- Open Graph (LinkedIn, Facebook, Slack, Discord) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Crossview" />
+  <meta property="og:title" content="Crossview — MITRE silo + 5-stage code scanner" />
+  <meta property="og:description" content="Anonymous HTTP → RCE, mapped to MITRE and prioritized by CISA KEV. A cross-referenced CWE/CAPEC/ATT&CK/ATLAS/D3FEND/UKC silo + code scanner + LLM intel fusion. Self-hosted." />
+  <meta property="og:url" content="https://kalanik0a.github.io/crossview/" />
+  <meta property="og:image" content="https://kalanik0a.github.io/crossview/og-card.png" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="640" />
+  <meta property="og:image:alt" content="Crossview exploit-chain flow graph: anonymous HTTP to RCE, mapped to MITRE." />
+  <!-- Self-hosted video (case-study.mp4 in this site) -->
+  <meta property="og:video" content="https://kalanik0a.github.io/crossview/case-study.mp4" />
+  <meta property="og:video:secure_url" content="https://kalanik0a.github.io/crossview/case-study.mp4" />
+  <meta property="og:video:type" content="video/mp4" />
+  <meta property="og:video:width" content="1280" />
+  <meta property="og:video:height" content="720" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Crossview — MITRE silo + 5-stage code scanner" />
+  <meta name="twitter:description" content="Anonymous HTTP → RCE, mapped to MITRE and prioritized by CISA KEV. Self-hosted, open-source." />
+  <meta name="twitter:image" content="https://kalanik0a.github.io/crossview/og-card.png" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="banner">
+    <span class="brand"><b>▶ CROSSVIEW</b></span>
+    <span class="tag">OPEN-SOURCE DEFENSE INTELLIGENCE PLATFORM</span>
+    <span class="unc">// SELF-HOSTED</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Cross-referenced MITRE silo<br/><span class="accent">+ 5-stage code scanner</span></h1>
+      <p class="lede">CWE · CAPEC · ATT&amp;CK · ATLAS · D3FEND · UKC &nbsp;+&nbsp; NVD/KEV enrichment &nbsp;+&nbsp; LLM intel fusion — one self-hosted tool that scans your code and threads every finding through the canonical graph.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/kalanik0a/crossview">View on GitHub</a>
+        <a class="btn" href="https://kalanik0a.github.io/crossview/#demo">Watch the case study</a>
+      </div>
+      <a id="demo"></a>
+      <figure class="shot">
+        <video controls preload="metadata" poster="og-card.png" playsinline width="100%">
+          <source src="case-study.mp4" type="video/mp4" />
+          <img src="flow-graph.gif" alt="The exploit chain executing" />
+        </video>
+        <figcaption>▶ The ~70 s cinematic case study. Crossview took a small open-source app from <b>anonymous HTTP to RCE</b> — 15 confirmed findings linked into one chain, every link cross-referenced to MITRE and prioritized by CISA KEV.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="kev-ticker.gif" alt="CISA KEV exploitation ticker: 65 actively-exploited CVEs, 9 ransomware" loading="lazy" />
+        <figcaption>Findings are re-ranked against CISA's Known Exploited Vulnerabilities — the most-exploited weakness class surfaces to the top.</figcaption>
+      </figure>
+    </section>
+
+    <section class="grid">
+      <div class="card"><h3>The silo</h3><p>~3,700 canonical MITRE entities (CWE/CAPEC/ATT&amp;CK/ATLAS/D3FEND/UKC) in one offline, cross-referenced graph. Query by ID, full-text search, or GraphQL.</p></div>
+      <div class="card"><h3>The scanner</h3><p>A 5-stage pipeline — survey → prematch → investigate → verify → report — that confirms reachability and walks each finding through the graph.</p></div>
+      <div class="card"><h3>Real-world signal</h3><p>NVD CVEs intersected with CISA KEV, so "this is a bug" becomes "this weakness class is exploited in the wild, 9 in ransomware."</p></div>
+      <div class="card"><h3>Intel fusion</h3><p>LLM-generated, grounded threat-intel reports attach to the same entity nodes — findings, taxonomy, exploitation data, and narrative intel share one index.</p></div>
+    </section>
+
+    <section class="grid">
+      <div class="card"><h3>Security posture</h3><p>Double-audited against 32 CWE categories (all PASS). 5 automated SAST scanners clean (Bandit, Semgrep, detect-secrets, Gitleaks, Trivy). 26 findings found and fixed across 2 passes.</p></div>
+      <div class="card"><h3>Output formats</h3><p>Markdown · SARIF 2.1.0 · STIX 2.1 · HTML — integrates with GitHub Code Scanning, VS Code, and threat intel platforms out of the box.</p></div>
+      <div class="card"><h3>Enrichment</h3><p>CISA Known Exploited Vulnerabilities (KEV) · NVD CVE bulk sweep · web research via crawl4ai — all cached in local SQLite, resumable, TTL-managed.</p></div>
+      <div class="card"><h3>Agent-ready</h3><p>Claude Code skill, MCP-compatible. Any AI agent can invoke Crossview to scan a codebase and receive structured SARIF findings. Pairs with <a href="https://github.com/kalanik0a/touchstone">Touchstone</a> for hardware-bound consent.</p></div>
+    </section>
+
+    <section class="foot">
+      <p>SARIF · STIX · GraphQL · TUI — self-hosted, zero external dependencies for the core.</p>
+      <a class="btn primary" href="https://github.com/kalanik0a/crossview">Get Crossview on GitHub</a>
+      <a class="btn" href="https://github.com/kalanik0a/crossview/blob/main/docs/cwe-compliance.md">CWE Compliance Matrix</a>
+    </section>
+  </main>
+
+  <footer><span>Crossview · MIT License · Sean Jeffery Kalanikoa Lum, 2026</span></footer>
+</body>
+</html>

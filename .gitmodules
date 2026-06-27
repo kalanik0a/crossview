@@ -1,0 +1,9 @@
+[submodule "rules/external/semgrep-rules"]
+	path = rules/external/semgrep-rules
+	url = https://github.com/semgrep/semgrep-rules.git
+[submodule "rules/external/elttam-rules"]
+	path = rules/external/elttam-rules
+	url = https://github.com/elttam/semgrep-rules.git
+[submodule "rules/external/trailofbits-rules"]
+	path = rules/external/trailofbits-rules
+	url = https://github.com/trailofbits/semgrep-rules.git

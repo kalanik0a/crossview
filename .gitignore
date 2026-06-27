@@ -1,0 +1,43 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+
+data/raw/
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+
+# Per-project cohort dirs that crossview scans create
+.crossview/
+
+CROSSVIEW-REPORT.md
+
+# Scratch / working files (kept in-project, not committed)
+.scratch/
+# Demo build intermediates
+docs/demo/assets/_*
+docs/demo/assets/*_concat.txt
+docs/demo/assets/slides/
+docs/demo/assets/mix.wav
+docs/demo/assets/vo_track.wav
+
+# Fetched engagement target (cloned by fetch-target.sh)
+examples/vulpy-engagement/target/
+# case-study video build intermediates
+examples/vulpy-engagement/assets/_hud_work/
+examples/vulpy-engagement/assets/_cine_work/
+examples/vulpy-engagement/assets/_cine_spec.json
+
+# Heavy media lives in the media library (~/Videos/visionlighter/crossview), not the repo
+docs/demo/crossview-demo.mp4
+docs/demo/assets/crossview-bed.mp3
+docs/demo/assets/vo/
+examples/vulpy-engagement/assets/case-study.mp4
+examples/vulpy-engagement/assets/vo_cine/
+examples/vulpy-engagement/assets/shots/

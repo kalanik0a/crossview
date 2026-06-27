@@ -1,0 +1,79 @@
+# Crossview rule presets.
+#
+# The harness composes these based on detected (language, framework, signals)
+# tuples. Paths under rules/external/ are git submodules; paths under
+# rules/custom/ are authored here.
+
+presets:
+  # ─────────────────────────────────────────── Python ─────────
+  # We use only the proven top-level submodule paths. Framework-specific
+  # subdirectories (python/fastapi, javascript/react) and elttam-rules contain
+  # rules with patterns the current semgrep version rejects, which contaminates
+  # combined runs. We can layer those back on once the parse-error issue is
+  # resolved upstream or by pinning a known-good submodule SHA.
+  python_base:
+    description: "Baseline Python security rules"
+    semgrep:
+      - "rules/external/semgrep-rules/python"
+      - "rules/external/trailofbits-rules/python"
+    bandit:
+      config: "rules/bandit.yaml"
+
+  python_fastapi:
+    description: "FastAPI patterns — currently subsumed by python_base"
+    semgrep: []
+
+  python_flask:
+    description: "Flask patterns — currently subsumed by python_base"
+    semgrep: []
+
+  python_django:
+    description: "Django patterns — currently subsumed by python_base"
+    semgrep: []
+
+  # ─────────────────────────────────────── TypeScript / JS ────
+  typescript_base:
+    description: "Baseline TypeScript / JavaScript security"
+    semgrep:
+      - "rules/external/semgrep-rules/typescript"
+      - "rules/external/semgrep-rules/javascript"
+
+  react:
+    description: "React patterns — currently subsumed by typescript_base"
+    semgrep: []
+
+  nextjs:
+    description: "Next.js patterns — currently subsumed by typescript_base"
+    semgrep: []
+
+  # ─────────────────────────────────────── Cross-cutting ──────
+  secrets:
+    description: "Hardcoded credential detection"
+    tools:
+      - trufflehog          # primary, with verification
+      - gitleaks            # git history
+      - detect-secrets      # baseline workflow + Python API
+
+  iac_container:
+    description: "Dockerfile, Compose, IaC, Kubernetes"
+    tools:
+      - trivy
+      - hadolint
+
+  deps:
+    description: "Dependency CVE scan via OSV-Scanner"
+    tools:
+      - osv-scanner
+
+  llm:
+    description: "ATLAS-tagged LLM/AI vulnerability patterns. Activates when
+                  the harness detects calls to anthropic, openai, langchain,
+                  llama_index, or similar LLM SDKs."
+    semgrep:
+      - "rules/custom/atlas-llm"
+
+# How to compose:
+#   per language → always include {lang}_base
+#   per detected framework → include the matching framework preset
+#   if LLM SDK detected → include 'llm'
+#   always include 'secrets', 'iac_container' (if Dockerfile present), 'deps'

@@ -1,0 +1,26 @@
+rules:
+  - id: atlas-llm-system-prompt-extraction-risk
+    languages: [python]
+    severity: INFO
+    message: |
+      Hardcoded system prompt as a string literal. MITRE ATLAS AML.T0056
+      (Extract LLM System Prompt): if an adversary can perform prompt
+      injection, the system prompt becomes extractable and any sensitive
+      instructions inside it leak. Move privileged operational instructions
+      to environment variables, secret stores, or external policy files;
+      never put credentials, internal URLs, or PII in a system prompt.
+    metadata:
+      cwe:
+        - "CWE-1426"
+        - "CWE-540"
+      atlas:
+        - "AML.T0056"
+      category: security
+      technology: [llm]
+      references:
+        - https://atlas.mitre.org/techniques/AML.T0056
+    pattern-either:
+      - pattern: |
+          $CLIENT.messages.create(..., system="...", ...)
+      - pattern: |
+          $CLIENT.chat.completions.create(..., messages=[{"role": "system", "content": "..."}, ...], ...)

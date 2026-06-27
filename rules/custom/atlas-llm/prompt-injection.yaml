@@ -1,0 +1,48 @@
+rules:
+  - id: atlas-llm-prompt-injection-anthropic
+    languages: [python]
+    severity: WARNING
+    message: |
+      Untrusted input flows directly into an Anthropic LLM `messages.create()` call.
+      MITRE ATLAS classifies this as AML.T0051 (LLM Prompt Injection): an
+      adversary can craft input that overrides the system prompt, causing
+      the model to act against its original instructions. Sanitize, fence,
+      or template user input before it reaches the LLM, and keep
+      privileged instructions in a system prompt the user cannot reach.
+    metadata:
+      cwe:
+        - "CWE-1426"
+      atlas:
+        - "AML.T0051"
+      category: security
+      technology: [anthropic, llm]
+      references:
+        - https://atlas.mitre.org/techniques/AML.T0051
+        - https://cwe.mitre.org/data/definitions/1426.html
+    pattern-either:
+      - pattern: |
+          $CLIENT.messages.create(...)
+      - pattern: |
+          await $CLIENT.messages.create(...)
+
+  - id: atlas-llm-prompt-injection-openai
+    languages: [python]
+    severity: WARNING
+    message: |
+      Untrusted input flows into an OpenAI `chat.completions.create()` call.
+      MITRE ATLAS AML.T0051 (LLM Prompt Injection). Treat user input as
+      adversarial and sanitize before placing in any message role.
+    metadata:
+      cwe:
+        - "CWE-1426"
+      atlas:
+        - "AML.T0051"
+      category: security
+      technology: [openai, llm]
+      references:
+        - https://atlas.mitre.org/techniques/AML.T0051
+    pattern-either:
+      - pattern: |
+          $CLIENT.chat.completions.create(...)
+      - pattern: |
+          await $CLIENT.chat.completions.create(...)

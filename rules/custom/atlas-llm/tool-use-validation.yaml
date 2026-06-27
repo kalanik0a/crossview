@@ -1,0 +1,25 @@
+rules:
+  - id: atlas-llm-tool-use-shell-passthrough
+    languages: [python]
+    severity: ERROR
+    message: |
+      LLM tool-use response (function call output) flows directly into a
+      shell or eval call. ATLAS AML.T0067 (LLM Trusted Output Components
+      Manipulation) — a prompt-injected LLM can choose any tool argument,
+      so any shell-execution sink reached from a tool argument is
+      effectively under adversary control. Validate tool arguments
+      against an allowlist before passing to the OS.
+    metadata:
+      cwe:
+        - "CWE-78"
+        - "CWE-1426"
+      atlas:
+        - "AML.T0067"
+      category: security
+    pattern-either:
+      - pattern: |
+          subprocess.$M($TOOL_ARGS, shell=True)
+      - pattern: |
+          os.system($TOOL_ARGS)
+      - pattern: |
+          subprocess.run($TOOL_ARGS, shell=True, ...)
